@@ -1,59 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trilha de CSS - DIO</title>
+  <title>Flashcards - Estude em qualquer lugar</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
 </head>
 <body>
-  <header class="banner">
-    <div class="banner-content">
-      <div class="logo">
-        <img src="assets/images/logo.png" title="Logotipo Trilha de CSS DIO" alt="Logotipo Trilha de CSS DIO">
+  <header class="app-header">
+    <div class="header-content">
+      <div class="brand">
+        <img src="assets/images/logo.png" alt="Logotipo estilizado de cartões" />
+        <div>
+          <p class="brand-kicker">Seu espaço de estudos portátil</p>
+          <h1>Flashcards para aprender onde estiver</h1>
+        </div>
       </div>
-      <h1>Trilha de CSS da DIO</h1>
-      <p>A nova Trilha de CSS da DIO está disponível. Acesse já <br> e aprenda do zero como desenvolver sites profissionais.</p>
-      <button>Quero me inscrever</button>
+      <p class="header-lead">
+        Organize conteúdos importantes, revise rapidamente e mantenha tudo sincronizado pelo seu navegador.
+        Monte decks personalizados e revise sempre que quiser, no computador, tablet ou celular.
+      </p>
+      <a class="cta" href="#criar-flashcard">Começar agora</a>
     </div>
   </header>
+
   <main>
-    <section id="course-content">
-      <h2>O que vou aprender?</h2>
-      <p>
-        Temos 3 módulos recheados de conteúdos do básico ao avançado para que você aprenda a 
-        desenvolver <br> sites profissionais utilizando somente HTML e CSS: sem nenhuma biblioteca ou framework a mais.
-      </p>
-      <div class="modules-list">
-        <div class="module">
-          <span>Módulo 01:</span> primeiros passos com CSS
-        </div>
-        <div class="module">
-          <span>Módulo 02:</span> trabalhando com layouts no CSS
-        </div>
-        <div class="module">
-          <span>Módulo 03:</span> refinando os estilos CSS das nossas páginas
-        </div>
+    <section class="intro" aria-labelledby="introducao">
+      <div class="intro-card">
+        <h2 id="introducao">Estudos inteligentes</h2>
+        <p>
+          Flashcards são a forma mais rápida de memorizar novas informações. Com nosso aplicativo, você cria suas próprias
+          perguntas e respostas, organiza por temas e revisa com um simples toque.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Revisões rápidas:</strong> toque no cartão para revelar a resposta.</li>
+          <li><strong>Personalização total:</strong> crie quantos cards desejar e categorize seus temas.</li>
+          <li><strong>Acesso universal:</strong> os cards ficam salvos no navegador e podem ser exportados.</li>
+        </ul>
       </div>
     </section>
-    <section id="transform-world">
-      <p>TRANSFORME <br> O MUNDO <br> COM A GENTE</p>
+
+    <section class="create-card" id="criar-flashcard" aria-labelledby="novo-card">
+      <div class="section-heading">
+        <h2 id="novo-card">Crie um novo flashcard</h2>
+        <p>Preencha os campos abaixo e comece seu deck de estudos.</p>
+      </div>
+      <form id="flashcard-form" class="card-form" novalidate>
+        <div class="form-field">
+          <label for="question">Pergunta</label>
+          <textarea id="question" name="question" rows="3" required placeholder="Ex.: O que é CSS?"></textarea>
+          <span class="input-hint">Explique de forma direta o conceito que deseja revisar.</span>
+        </div>
+        <div class="form-field">
+          <label for="answer">Resposta</label>
+          <textarea id="answer" name="answer" rows="4" required placeholder="Ex.: Linguagem de estilo usada para definir a apresentação de documentos HTML."></textarea>
+          <span class="input-hint">Escreva a explicação completa para revisar depois.</span>
+        </div>
+        <div class="form-inline">
+          <div class="form-field">
+            <label for="category">Categoria (opcional)</label>
+            <input id="category" name="category" type="text" placeholder="Ex.: Front-end" />
+          </div>
+          <button type="submit" class="primary-btn">Adicionar flashcard</button>
+        </div>
+        <p class="form-feedback" role="status" aria-live="polite"></p>
+      </form>
     </section>
-    <section id="professional-challenges">
-      <h3>Evolua e encare novos desafios <br> profissionais</h3>
-      <img src="assets/images/professional-challenges.png" title="Homem lendo depoimentos em um tablet" alt="Homem lendo depoimentos em um tablet">
-      <p>
-        Junte-se ao nosso ecossistema e transforme o mundo com a gente! Todos os dias dezenas de empresas <br>
-        acessam a nossa plataforma em busca dos talentos mais criativos, dinâmicos e colaborativos, 
-        além do <br> conhecimento técnico. 
-        A nossa missão é te preparar para que você conecte-se com as melhores <br> oportunidades.
-      </p>
+
+    <section class="deck" aria-labelledby="seu-deck">
+      <div class="section-heading">
+        <h2 id="seu-deck">Seu deck</h2>
+        <p>Toque em um card para revelar a resposta. Arraste para reorganizar se estiver em um dispositivo com suporte a mouse.</p>
+      </div>
+
+      <div class="deck-actions">
+        <label for="filter">Filtrar por categoria</label>
+        <select id="filter" name="filter">
+          <option value="">Todas as categorias</option>
+        </select>
+        <button type="button" id="export" class="secondary-btn">Exportar deck</button>
+        <label class="import-label" for="import">Importar</label>
+        <input type="file" id="import" accept="application/json" />
+      </div>
+
+      <div class="flashcard-grid" id="flashcard-grid" aria-live="polite"></div>
+      <p class="empty-state" hidden>Seu deck está vazio. Crie um novo flashcard para começar a revisar.</p>
     </section>
   </main>
-  <footer>
-    <img class="dio-logo" src="assets/images/dio-logo.png" title="Logotipo DIO com o texto make the change" alt="Logotipo DIO com o texto make the change">
-    <p>Acesse <a href="https://dio.me">dio.me</a> e se cadastre agora</p>
+
+  <template id="flashcard-template">
+    <article class="flashcard" tabindex="0">
+      <div class="card-face card-front">
+        <span class="card-category"></span>
+        <p class="card-question"></p>
+        <span class="flip-hint">Clique ou pressione Enter para ver a resposta</span>
+      </div>
+      <div class="card-face card-back">
+        <span class="card-category"></span>
+        <p class="card-answer"></p>
+        <button type="button" class="delete-btn" aria-label="Remover flashcard">Remover</button>
+      </div>
+    </article>
+  </template>
+
+  <footer class="app-footer">
+    <p>Leve seus conhecimentos para qualquer lugar. Salve esta página como favorito e revise sempre que precisar.</p>
+    <p class="footer-credits">Feito com foco em produtividade e acessibilidade.</p>
   </footer>
 </body>
 </html>
