@@ -1,59 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trilha de CSS - DIO</title>
+  <title>FlashLearn - construtor de flashcards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="banner">
-    <div class="banner-content">
-      <div class="logo">
-        <img src="assets/images/logo.png" title="Logotipo Trilha de CSS DIO" alt="Logotipo Trilha de CSS DIO">
+  <header class="hero" id="inicio">
+    <div class="container hero__content">
+      <div class="hero__copy">
+        <span class="hero__tag">FlashLearn</span>
+        <h1>Crie flashcards incríveis em segundos</h1>
+        <p>Organize seus estudos com um construtor intuitivo de flashcards que funciona no navegador e no aplicativo.
+          Conecte ideias, personalize cores e revise onde estiver.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#construtor">Começar agora</a>
+          <a class="btn" href="#aplicativo">Conheça o app</a>
+        </div>
       </div>
-      <h1>Trilha de CSS da DIO</h1>
-      <p>A nova Trilha de CSS da DIO está disponível. Acesse já <br> e aprenda do zero como desenvolver sites profissionais.</p>
-      <button>Quero me inscrever</button>
+      <div class="hero__preview">
+        <div class="phone">
+          <div class="phone__status-bar"></div>
+          <div class="phone__screen">
+            <p class="phone__title">Lista de revisão</p>
+            <div class="phone__card">
+              <span class="phone__category">Biologia</span>
+              <p>O que as mitocôndrias produzem?</p>
+              <span class="phone__hint">Toque para revelar</span>
+            </div>
+            <div class="phone__progress">
+              <span></span><span></span><span></span>
+            </div>
+            <button class="btn btn--primary">Continuar revisão</button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
+
   <main>
-    <section id="course-content">
-      <h2>O que vou aprender?</h2>
-      <p>
-        Temos 3 módulos recheados de conteúdos do básico ao avançado para que você aprenda a 
-        desenvolver <br> sites profissionais utilizando somente HTML e CSS: sem nenhuma biblioteca ou framework a mais.
-      </p>
-      <div class="modules-list">
-        <div class="module">
-          <span>Módulo 01:</span> primeiros passos com CSS
+    <section class="section" id="construtor">
+      <div class="container">
+        <div class="section__header">
+          <h2>Construtor de flashcards</h2>
+          <p>Mantenha todas as informações importantes sempre à mão. Adicione cartões com perguntas, respostas e
+            categorias em poucos cliques.</p>
+          <p class="section__counter"><strong data-card-count>0</strong> flashcards na sua coleção.</p>
         </div>
-        <div class="module">
-          <span>Módulo 02:</span> trabalhando com layouts no CSS
+
+        <div class="builder">
+          <form class="card-form" data-card-form>
+            <div class="form-group">
+              <label for="frente">Frente do card</label>
+              <input type="text" id="frente" name="frente" placeholder="Ex.: Explique a lei da gravitação" required maxlength="140">
+            </div>
+            <div class="form-group">
+              <label for="verso">Verso do card</label>
+              <textarea id="verso" name="verso" placeholder="Ex.: A força de atração entre dois corpos..." required maxlength="300"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select id="categoria" name="categoria">
+                  <option value="Revisão rápida">Revisão rápida</option>
+                  <option value="Línguas">Línguas</option>
+                  <option value="Ciências">Ciências</option>
+                  <option value="Matemática">Matemática</option>
+                  <option value="História">História</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="cor">Cor do card</label>
+                <input type="color" id="cor" name="cor" value="#2563eb">
+              </div>
+            </div>
+            <button class="btn btn--primary" type="submit">Adicionar flashcard</button>
+            <p class="form__hint">Os cards ficam salvos automaticamente no seu navegador.</p>
+          </form>
+
+          <aside class="tips">
+            <h3>Dicas para memorizar melhor</h3>
+            <ul>
+              <li>Crie cards curtos e objetivos. Separe assuntos por categorias.</li>
+              <li>Alterne a ordem de estudo para estimular o cérebro.</li>
+              <li>Revise com frequência e marque os cards mais difíceis.</li>
+            </ul>
+          </aside>
         </div>
-        <div class="module">
-          <span>Módulo 03:</span> refinando os estilos CSS das nossas páginas
+
+        <div class="cards">
+          <p class="empty-state" data-empty-state>Crie seu primeiro flashcard preenchendo o formulário ao lado.</p>
+          <div class="cards__grid" data-card-list></div>
         </div>
       </div>
     </section>
-    <section id="transform-world">
-      <p>TRANSFORME <br> O MUNDO <br> COM A GENTE</p>
-    </section>
-    <section id="professional-challenges">
-      <h3>Evolua e encare novos desafios <br> profissionais</h3>
-      <img src="assets/images/professional-challenges.png" title="Homem lendo depoimentos em um tablet" alt="Homem lendo depoimentos em um tablet">
-      <p>
-        Junte-se ao nosso ecossistema e transforme o mundo com a gente! Todos os dias dezenas de empresas <br>
-        acessam a nossa plataforma em busca dos talentos mais criativos, dinâmicos e colaborativos, 
-        além do <br> conhecimento técnico. 
-        A nossa missão é te preparar para que você conecte-se com as melhores <br> oportunidades.
-      </p>
+
+    <section class="section section--highlight" id="aplicativo">
+      <div class="container app">
+        <div class="app__copy">
+          <h2>Aplicativo pensado para revisões rápidas</h2>
+          <p>Sincronize sua coleção com o aplicativo móvel e estude em sessões curtas, mesmo offline. Receba lembretes,
+            marque cards dominados e acompanhe seu progresso com gráficos claros.</p>
+          <ul class="feature-list">
+            <li>Modo de estudo espaçado com notificações inteligentes.</li>
+            <li>Filtros por disciplina, nível de dificuldade e tempo de revisão.</li>
+            <li>Integração com áudio para praticar pronúncia em outros idiomas.</li>
+          </ul>
+          <div class="store-buttons">
+            <a class="btn" href="#">Baixar para iOS</a>
+            <a class="btn" href="#">Baixar para Android</a>
+          </div>
+        </div>
+        <div class="app__cards">
+          <article class="preview-card">
+            <span class="preview-card__tag">Gramática</span>
+            <p class="preview-card__question">Qual a diferença entre &quot;por que&quot; e &quot;por quê&quot;?</p>
+            <p class="preview-card__answer">Use &quot;por que&quot; em perguntas diretas ou quando equivale a &quot;por qual motivo&quot;.
+              Empregue &quot;por quê&quot; quando a expressão vier antes de pontuação final.</p>
+          </article>
+          <article class="preview-card">
+            <span class="preview-card__tag">História</span>
+            <p class="preview-card__question">Quando ocorreu a Revolução Industrial?</p>
+            <p class="preview-card__answer">Entre a metade do século XVIII e início do século XIX, com início na Inglaterra.</p>
+          </article>
+        </div>
+      </div>
     </section>
   </main>
-  <footer>
-    <img class="dio-logo" src="assets/images/dio-logo.png" title="Logotipo DIO com o texto make the change" alt="Logotipo DIO com o texto make the change">
-    <p>Acesse <a href="https://dio.me">dio.me</a> e se cadastre agora</p>
+
+  <footer class="footer">
+    <div class="container footer__content">
+      <p>&copy; 2024 FlashLearn. Estude com mais propósito.</p>
+      <a href="#inicio">Voltar para o topo</a>
+    </div>
   </footer>
+
+  <script>
+    const storageKey = 'flashlearn-cards';
+    const form = document.querySelector('[data-card-form]');
+    const list = document.querySelector('[data-card-list]');
+    const emptyState = document.querySelector('[data-empty-state]');
+    const counter = document.querySelector('[data-card-count]');
+
+    const createId = () => (
+      window.crypto && typeof window.crypto.randomUUID === 'function'
+        ? window.crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(16).slice(2)}`
+    );
+
+    const sampleCards = [
+      {
+        id: createId(),
+        front: 'Defina o conceito de fotossíntese.',
+        back: 'Processo em que plantas transformam energia luminosa em química, produzindo glicose e oxigênio.',
+        category: 'Ciências',
+        color: '#16a34a'
+      },
+      {
+        id: createId(),
+        front: 'Como dizer &ldquo;prazer em conhecê-lo&rdquo; em inglês?',
+        back: 'Say: Nice to meet you.',
+        category: 'Línguas',
+        color: '#7c3aed'
+      }
+    ];
+
+    function readStorage() {
+      try {
+        const stored = localStorage.getItem(storageKey);
+        return stored ? JSON.parse(stored) : [];
+      } catch (error) {
+        console.error('Não foi possível ler os flashcards salvos', error);
+        return [];
+      }
+    }
+
+    function saveStorage(cards) {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(cards));
+      } catch (error) {
+        console.error('Não foi possível salvar os flashcards', error);
+      }
+    }
+
+    function createCardElement(card) {
+      const article = document.createElement('article');
+      article.className = 'flashcard';
+      article.dataset.id = card.id;
+      article.style.setProperty('--card-color', card.color);
+
+      const inner = document.createElement('div');
+      inner.className = 'flashcard__inner';
+
+      const front = document.createElement('div');
+      front.className = 'flashcard__face flashcard__face--front';
+      front.innerHTML = `
+        <span class="flashcard__category">${card.category}</span>
+        <p>${card.front}</p>
+        <span class="flashcard__hint">Clique para virar</span>
+      `;
+
+      const back = document.createElement('div');
+      back.className = 'flashcard__face flashcard__face--back';
+      back.innerHTML = `
+        <p>${card.back}</p>
+        <button type="button" class="flashcard__delete" data-action="delete">Remover card</button>
+      `;
+
+      inner.append(front, back);
+      article.append(inner);
+
+      article.addEventListener('click', () => {
+        article.classList.toggle('is-flipped');
+      });
+
+      back.querySelector('[data-action="delete"]').addEventListener('click', (event) => {
+        event.stopPropagation();
+        deleteCard(card.id);
+      });
+
+      return article;
+    }
+
+    function renderCards(cards) {
+      list.innerHTML = '';
+      if (!cards.length) {
+        emptyState.hidden = false;
+      } else {
+        emptyState.hidden = true;
+        cards.forEach((card) => {
+          list.appendChild(createCardElement(card));
+        });
+      }
+      counter.textContent = cards.length;
+    }
+
+    function deleteCard(id) {
+      cards = cards.filter((card) => card.id !== id);
+      saveStorage(cards);
+      renderCards(cards);
+    }
+
+    let cards = readStorage();
+    if (!cards.length) {
+      cards = sampleCards;
+    }
+    renderCards(cards);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const card = {
+        id: createId(),
+        front: data.get('frente').trim(),
+        back: data.get('verso').trim(),
+        category: data.get('categoria'),
+        color: data.get('cor') || '#2563eb'
+      };
+
+      if (!card.front || !card.back) {
+        return;
+      }
+
+      cards = [card, ...cards];
+      saveStorage(cards);
+      renderCards(cards);
+      form.reset();
+      form.querySelector('#cor').value = '#2563eb';
+      form.querySelector('#frente').focus();
+    });
+  </script>
 </body>
 </html>
