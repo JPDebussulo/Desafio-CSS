@@ -1,59 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trilha de CSS - DIO</title>
+  <title>Radar de Concursos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <header class="banner">
-    <div class="banner-content">
-      <div class="logo">
-        <img src="assets/images/logo.png" title="Logotipo Trilha de CSS DIO" alt="Logotipo Trilha de CSS DIO">
+  <header class="hero">
+    <div class="container hero__content">
+      <div>
+        <p class="eyebrow">Monitor de oportunidades</p>
+        <h1>Encontre concursos previstos ou com edital aberto</h1>
+        <p class="lead">Busque por palavra-chave, filtre por área de interesse e acompanhe rapidamente o status das seleções mais recentes.</p>
+        <div class="highlight-card">
+          <span class="badge badge--live">Atualizações diárias</span>
+          <p>Crie filtros por área para salvar tempo e não perder os prazos importantes.</p>
+        </div>
       </div>
-      <h1>Trilha de CSS da DIO</h1>
-      <p>A nova Trilha de CSS da DIO está disponível. Acesse já <br> e aprenda do zero como desenvolver sites profissionais.</p>
-      <button>Quero me inscrever</button>
+      <div class="hero__cta">
+        <div class="cta-card">
+          <p class="eyebrow">Assine alertas</p>
+          <h2>Receba novidades do seu interesse</h2>
+          <p class="muted">Escolha áreas, informe palavras-chave e receba uma lista pronta para estudar.</p>
+          <button type="button" class="primary-button">Quero receber alertas</button>
+        </div>
+      </div>
     </div>
   </header>
-  <main>
-    <section id="course-content">
-      <h2>O que vou aprender?</h2>
-      <p>
-        Temos 3 módulos recheados de conteúdos do básico ao avançado para que você aprenda a 
-        desenvolver <br> sites profissionais utilizando somente HTML e CSS: sem nenhuma biblioteca ou framework a mais.
-      </p>
-      <div class="modules-list">
-        <div class="module">
-          <span>Módulo 01:</span> primeiros passos com CSS
+
+  <main class="container">
+    <section class="panel" aria-labelledby="busca-title">
+      <div class="panel__header">
+        <div>
+          <p class="eyebrow">Filtros rápidos</p>
+          <h2 id="busca-title">Busque concursos por área, status e palavra-chave</h2>
         </div>
-        <div class="module">
-          <span>Módulo 02:</span> trabalhando com layouts no CSS
+        <p class="muted">Use os filtros abaixo para localizar concursos previstos, com edital aberto ou inscrições abertas.</p>
+      </div>
+      <form id="search-form" class="search-form" novalidate>
+        <label class="field">
+          <span>Palavra-chave</span>
+          <input type="text" id="keyword" name="keyword" placeholder="Ex.: tribunal, analista, prefeitura">
+        </label>
+        <label class="field">
+          <span>Status</span>
+          <select id="status-filter" name="status">
+            <option value="all">Todos</option>
+            <option value="aberto">Edital aberto</option>
+            <option value="inscricoes">Inscrições abertas</option>
+            <option value="previsto">Previsto</option>
+          </select>
+        </label>
+        <div class="field field--full">
+          <div class="field__label-row">
+            <span>Áreas de interesse</span>
+            <button type="button" id="clear-areas" class="ghost-button">Limpar</button>
+          </div>
+          <div id="interest-chips" class="chips" role="group" aria-label="Áreas de interesse"></div>
         </div>
-        <div class="module">
-          <span>Módulo 03:</span> refinando os estilos CSS das nossas páginas
+        <button type="submit" class="primary-button">Buscar concursos</button>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="result-title">
+      <div class="panel__header">
+        <div>
+          <p class="eyebrow">Resultados</p>
+          <h2 id="result-title">Concursos encontrados</h2>
         </div>
+        <p id="results-count" class="muted"></p>
+      </div>
+      <div id="results-grid" class="results-grid" role="list"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <div class="empty-state__icon">🔎</div>
+        <h3>Não encontramos nada com esses filtros</h3>
+        <p class="muted">Tente remover algum filtro ou usar outra palavra-chave.</p>
       </div>
     </section>
-    <section id="transform-world">
-      <p>TRANSFORME <br> O MUNDO <br> COM A GENTE</p>
-    </section>
-    <section id="professional-challenges">
-      <h3>Evolua e encare novos desafios <br> profissionais</h3>
-      <img src="assets/images/professional-challenges.png" title="Homem lendo depoimentos em um tablet" alt="Homem lendo depoimentos em um tablet">
-      <p>
-        Junte-se ao nosso ecossistema e transforme o mundo com a gente! Todos os dias dezenas de empresas <br>
-        acessam a nossa plataforma em busca dos talentos mais criativos, dinâmicos e colaborativos, 
-        além do <br> conhecimento técnico. 
-        A nossa missão é te preparar para que você conecte-se com as melhores <br> oportunidades.
-      </p>
-    </section>
   </main>
-  <footer>
-    <img class="dio-logo" src="assets/images/dio-logo.png" title="Logotipo DIO com o texto make the change" alt="Logotipo DIO com o texto make the change">
-    <p>Acesse <a href="https://dio.me">dio.me</a> e se cadastre agora</p>
+
+  <footer class="page-footer">
+    <div class="container footer__content">
+      <div>
+        <p class="eyebrow">Radar de Concursos</p>
+        <h3>Fique sempre à frente dos editais</h3>
+        <p class="muted">Uma visão consolidada para acompanhar concursos previstos, editais publicados e inscrições abertas.</p>
+      </div>
+      <div class="footer__actions">
+        <button type="button" class="secondary-button">Ver concursos salvos</button>
+        <button type="button" class="primary-button">Criar alerta personalizado</button>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
