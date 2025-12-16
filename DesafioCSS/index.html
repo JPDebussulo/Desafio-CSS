@@ -2,98 +2,38 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radar de Concursos</title>
+  <title>Meu Caderno de Planejamento</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <header class="hero">
-    <div class="container hero__content">
-      <div>
-        <p class="eyebrow">Monitor de oportunidades</p>
-        <h1>Encontre concursos previstos ou com edital aberto</h1>
-        <p class="lead">Busque por palavra-chave, filtre por área de interesse e acompanhe rapidamente o status das seleções mais recentes.</p>
-        <div class="highlight-card">
-          <span class="badge badge--live">Atualizações diárias</span>
-          <p>Crie filtros por área para salvar tempo e não perder os prazos importantes.</p>
-        </div>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Sessões de anotações">
+      <div class="sidebar__header">
+        <p class="eyebrow">Organizador pessoal</p>
+        <h1>Planeje e acompanhe</h1>
+        <p class="muted">Clique em um tópico para escrever ou revisar suas anotações.</p>
       </div>
-      <div class="hero__cta">
-        <div class="cta-card">
-          <p class="eyebrow">Assine alertas</p>
-          <h2>Receba novidades do seu interesse</h2>
-          <p class="muted">Escolha áreas, informe palavras-chave e receba uma lista pronta para estudar.</p>
-          <button type="button" class="primary-button">Quero receber alertas</button>
-        </div>
-      </div>
-    </div>
-  </header>
+      <nav class="sidebar__list" id="section-list" role="tablist" aria-orientation="vertical"></nav>
+    </aside>
 
-  <main class="container">
-    <section class="panel" aria-labelledby="busca-title">
-      <div class="panel__header">
+    <main class="editor" role="region" aria-live="polite">
+      <div class="editor__header">
         <div>
-          <p class="eyebrow">Filtros rápidos</p>
-          <h2 id="busca-title">Busque concursos por área, status e palavra-chave</h2>
+          <p class="eyebrow">Sessão atual</p>
+          <h2 id="section-title">Selecione um tópico</h2>
         </div>
-        <p class="muted">Use os filtros abaixo para localizar concursos previstos, com edital aberto ou inscrições abertas.</p>
+        <p class="muted" id="autosave-hint">Salvamento automático a cada digitação.</p>
       </div>
-      <form id="search-form" class="search-form" novalidate>
-        <label class="field">
-          <span>Palavra-chave</span>
-          <input type="text" id="keyword" name="keyword" placeholder="Ex.: tribunal, analista, prefeitura">
+      <section class="editor__body">
+        <label class="field" for="notes-area">
+          <span id="field-label">Conteúdos e planos</span>
+          <textarea id="notes-area" placeholder="Clique em um tópico e comece a escrever seus planos, metas ou ideias"></textarea>
         </label>
-        <label class="field">
-          <span>Status</span>
-          <select id="status-filter" name="status">
-            <option value="all">Todos</option>
-            <option value="aberto">Edital aberto</option>
-            <option value="inscricoes">Inscrições abertas</option>
-            <option value="previsto">Previsto</option>
-          </select>
-        </label>
-        <div class="field field--full">
-          <div class="field__label-row">
-            <span>Áreas de interesse</span>
-            <button type="button" id="clear-areas" class="ghost-button">Limpar</button>
-          </div>
-          <div id="interest-chips" class="chips" role="group" aria-label="Áreas de interesse"></div>
-        </div>
-        <button type="submit" class="primary-button">Buscar concursos</button>
-      </form>
-    </section>
-
-    <section class="panel" aria-labelledby="result-title">
-      <div class="panel__header">
-        <div>
-          <p class="eyebrow">Resultados</p>
-          <h2 id="result-title">Concursos encontrados</h2>
-        </div>
-        <p id="results-count" class="muted"></p>
-      </div>
-      <div id="results-grid" class="results-grid" role="list"></div>
-      <div id="empty-state" class="empty-state" hidden>
-        <div class="empty-state__icon">🔎</div>
-        <h3>Não encontramos nada com esses filtros</h3>
-        <p class="muted">Tente remover algum filtro ou usar outra palavra-chave.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="page-footer">
-    <div class="container footer__content">
-      <div>
-        <p class="eyebrow">Radar de Concursos</p>
-        <h3>Fique sempre à frente dos editais</h3>
-        <p class="muted">Uma visão consolidada para acompanhar concursos previstos, editais publicados e inscrições abertas.</p>
-      </div>
-      <div class="footer__actions">
-        <button type="button" class="secondary-button">Ver concursos salvos</button>
-        <button type="button" class="primary-button">Criar alerta personalizado</button>
-      </div>
-    </div>
-  </footer>
+        <div class="status-bar" id="status-bar" aria-live="polite">Nenhuma sessão selecionada.</div>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
